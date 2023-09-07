@@ -1,0 +1,90 @@
+<%- include('includes/head') %> <%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Agenda</h1>
+      <p class="text-center lead">Seus contatos estão abaixo</p>
+
+      <%- include('includes/messages') %> <% if(contatos.length > 0) { %>
+      <div class="responsive-table">
+        <table class="table my-3">
+          <% contatos.forEach(contato => { %>
+          <!-- Código HTML para o modal de confirmação -->
+          <div
+            class="modal fade"
+            id="deleteModal<%= contato._id %>"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="deleteModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">
+                    Confirmação de Exclusão
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Tem certeza de que deseja excluir este contato?
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                  <a
+                    class="text-danger"
+                    href="/contato/delete/<%= contato._id %>"
+                    ><button type="button" class="btn btn-danger">
+                      Excluir
+                    </button></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <tr>
+            <td><%= contato.nome %></td>
+            <td><%= contato.sobrenome %></td>
+            <td><%= contato.telefone %></td>
+            <td><%= contato.email %></td>
+            <td>
+              <a href="/contato/index/<%= contato._id %>"
+                ><button type="button" class="btn btn-warning btn-xs">
+                  Editar
+                </button></a
+              >
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteModal<%= contato._id %>">Excluir</button>
+            </td>
+          </tr>
+          <% }); %>
+        </table>
+      </div>
+      <% } else { %>
+      <p class="text-center lead">Não existem contatos na sua agenda.</p>
+      <% } %>
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>
