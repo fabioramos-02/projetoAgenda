@@ -55,7 +55,7 @@ export default class Contato {
       }, 3000); // 7000 milissegundos = 7 segundos
     } else {
       // Esconder mensagens de erro e enviar o formulário se não houver erros
-      errorContainer.style.display = "none "; // Esconder o container de mensagens de erro
+      errorContainer.style.display = "none"; // Esconder o container de mensagens de erro
       divDoAlert.classList.remove("alert", "alert-danger"); // Remover as classes Bootstrap
       el.submit();
     }
